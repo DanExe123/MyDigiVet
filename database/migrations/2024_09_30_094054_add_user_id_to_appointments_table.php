@@ -11,11 +11,13 @@ return new class extends Migration
      */
     public function up()
     {
+        if (Schema::hasTable('appointments')) {
         Schema::table('appointments', function (Blueprint $table) {
             $table->unsignedBigInteger('user_id')->nullable(); // Make it nullable in case some appointments don't have a user
             $table->foreign('user_id')->references('id')->on('users')->onDelete('set null'); // Create foreign key
         });
     }
+}
     
     public function down()
     {
